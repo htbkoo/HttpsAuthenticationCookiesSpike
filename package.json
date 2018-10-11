@@ -1,0 +1,22 @@
+{
+  "name": "analytics-and-ads-spike",
+  "version": "0.1.0",
+  "description": "A small project to spike the usage of Google Analytics and AdsSense",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/htbkoo/AnalyticsAndAdsSpike.git"
+  },
+  "author": "htbkoo",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/htbkoo/AnalyticsAndAdsSpike/issues"
+  },
+  "homepage": "https://github.com/htbkoo/AnalyticsAndAdsSpike#readme",
+  "dependencies": {
+    "tsoa": "^2.2.5"
+  }
+}
