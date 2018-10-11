@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/htbkoo/AnalyticsAndAdsSpike#readme",
   "dependencies": {
-    "tsoa": "^2.2.5"
+    "typescript": "^3.1.2"
   }
 }
