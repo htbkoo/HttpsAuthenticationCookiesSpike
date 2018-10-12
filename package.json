@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/htbkoo/AnalyticsAndAdsSpike#readme",
   "dependencies": {
+    "@types/express": "^4.16.0",
     "express": "^4.16.4",
     "typescript": "^3.1.2"
   }
