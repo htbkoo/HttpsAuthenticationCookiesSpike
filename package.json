@@ -21,6 +21,7 @@
   "homepage": "https://github.com/htbkoo/AnalyticsAndAdsSpike#readme",
   "dependencies": {
     "@types/express": "^4.16.0",
+    "@zeit/next-typescript": "^1.1.1",
     "express": "^4.16.4",
     "next": "^7.0.2",
     "react": "^16.5.2",
