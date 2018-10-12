@@ -169,3 +169,6 @@ fabric.properties
 
 # Serverless directories
 .serverless
+
+# build output
+build/
