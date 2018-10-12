@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "run": "node build/server.js"
+    "run": "node build/server.js",
+    "build": "npm run build-ts",
+    "build-ts": "npm run tsc",
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",
