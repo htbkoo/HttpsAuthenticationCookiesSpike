@@ -7,7 +7,6 @@ import {WelcomeController} from "./controllers/welcome";
 const app: express.Application = express();
 
 // The port that app would listen on
-
 const port: number = getPortFromEnvOrElse(3000);
 
 // Mount the WelcomeController at the /welcome router
