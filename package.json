@@ -4,7 +4,8 @@
   "description": "A small project to spike the usage of Google Analytics and AdsSense",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "node build/server.js"
   },
   "repository": {
     "type": "git",
