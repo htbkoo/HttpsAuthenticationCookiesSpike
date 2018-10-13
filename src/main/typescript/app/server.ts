@@ -1,22 +1,32 @@
-import express from 'express';
+const express = require('express');
+const next = require('next');
 
-// Import WelcomeController from controllers entry point
-import {WelcomeController} from "./controllers/welcome";
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({dev});
+const handle = app.getRequestHandler();
 
-// Create a new express application instance
-const app: express.Application = express();
+app.prepare()
+    .then(() => {
+        const server = express();
 
-// The port that app would listen on
-const port: number = getPortFromEnvOrElse(3000);
+        server.get('*', (req, res) => {
+            return handle(req, res)
+        });
 
-// Mount the WelcomeController at the /welcome router
-app.use('/welcome', WelcomeController);
-
-// Serve the application at the given port
-app.listen(port, () => {
-    // Success callback
-    console.log(`Listening at http://localhost:${port}`);
-});
+        // The port that app would listen on
+        const port: number = getPortFromEnvOrElse(3000);
+        server.listen(port, (err: Error) => {
+            if (err) {
+                throw err;
+            } else {
+                console.log(`> Ready on http://localhost:${port}`);
+            }
+        })
+    })
+    .catch(ex => {
+        console.error(ex.stack);
+        process.exit(1)
+    });
 
 function getPortFromEnvOrElse(defaultPort: number): number {
     let port = process.env.PORT;
