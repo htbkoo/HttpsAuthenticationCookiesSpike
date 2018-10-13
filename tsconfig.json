@@ -90,7 +90,7 @@
   ],
   "exclude": [
     "**/__mocks__/**/*",
-    "src/**/*.spec.ts",
-    "src/**/*.test.ts"
+    "**/*.spec.ts",
+    "**/*.test.ts"
   ]
 }
