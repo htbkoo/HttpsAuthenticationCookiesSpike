@@ -11,8 +11,14 @@ module.exports = app.prepare()
         console.log('setting up express server');
         const server = express();
 
-        server.get('/p/:id', (req, res) => {
+        server.get('/p/:title', (req, res) => {
             const actualPage = '/post';
+            const queryParams = {title: req.params.title};
+            return app.render(req, res, actualPage, queryParams);
+        });
+
+        server.get('/s/:id', (req, res) => {
+            const actualPage = '/show';
             const queryParams = {id: req.params.id};
             return app.render(req, res, actualPage, queryParams);
         });
