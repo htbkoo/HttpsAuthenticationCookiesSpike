@@ -5,8 +5,10 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
 const handle = app.getRequestHandler();
 
-app.prepare()
+// exported for tests
+module.exports = app.prepare()
     .then(() => {
+        console.log('setting up express server');
         const server = express();
 
         server.get('*', (req, res) => handle(req, res));
@@ -19,7 +21,10 @@ app.prepare()
             } else {
                 console.log(`> Ready on http://localhost:${port}`);
             }
-        })
+        });
+
+        // exported for tests
+        return server;
     })
     .catch(ex => {
         console.error(ex.stack);
@@ -35,5 +40,4 @@ function getPortFromEnvOrElse(defaultPort: number): number {
         }
     }
     return defaultPort;
-
 }
