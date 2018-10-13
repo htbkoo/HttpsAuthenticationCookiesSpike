@@ -4,12 +4,13 @@ import Link from 'next/link';
 import Layout from "../components/MyLayout";
 
 type PostLinkProps = {
-    title: string
+    title: string,
+    id: string
 }
 
-const PostLink = ({title}: PostLinkProps) => (
+const PostLink = ({title, id}: PostLinkProps) => (
     <li>
-        <Link href={`/post?title=${title}`}>
+        <Link as={`/p/${id}`} href={`/post?title=${title}`}>
             <a>{title}</a>
         </Link>
     </li>
@@ -19,9 +20,9 @@ const Index = () => (
     <Layout>
         <h1>My Blog</h1>
         <ul>
-            <PostLink title="Hello Next.js"/>
-            <PostLink title="Learn"/>
-            <PostLink title="Deploy"/>
+            <PostLink id="hello-nextjs" title="Hello Next.js"/>
+            <PostLink id="learn-nextjs" title="Learn"/>
+            <PostLink id="deploy-nextjs" title="Deploy"/>
         </ul>
     </Layout>
 );
