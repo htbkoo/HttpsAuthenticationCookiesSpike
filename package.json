@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "next",
+    "dev": "node src/main/typescript/app/server.ts",
     "build": "next build",
     "start": "next start"
   },
@@ -34,6 +34,7 @@
     "@types/jest": "^23.3.5",
     "@types/next": "^7.0.2",
     "@types/react": "^16.4.16",
+    "cross-env": "^5.2.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
     "jest": "^23.6.0",
