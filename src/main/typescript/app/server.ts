@@ -11,6 +11,12 @@ module.exports = app.prepare()
         console.log('setting up express server');
         const server = express();
 
+        server.get('/p/:id', (req, res) => {
+            const actualPage = '/post';
+            const queryParams = {title: req.params.id};
+            return app.render(req, res, actualPage, queryParams);
+        });
+
         server.get('*', (req, res) => {
             console.log(`received GET request for ${req.originalUrl}`);
             return handle(req, res);
