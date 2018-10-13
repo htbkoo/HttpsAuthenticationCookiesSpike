@@ -4,19 +4,6 @@ import fetch from 'isomorphic-unfetch';
 
 import Layout from "../components/MyLayout";
 
-type PostLinkProps = {
-    title: string,
-    id: string
-}
-
-const PostLink = ({title, id}: PostLinkProps) => (
-    <li>
-        <Link as={`/p/${id}`} href={`/post?title=${title}`}>
-            <a>{title}</a>
-        </Link>
-    </li>
-);
-
 const ShowsList = ({shows}) => (
     <ul>
         {shows.map(({show}) => (
@@ -32,11 +19,6 @@ const ShowsList = ({shows}) => (
 const Index = (props) => (
     <Layout>
         <h1>My Blog</h1>
-        <ul>
-            <PostLink id="hello-nextjs" title="Hello Next.js"/>
-            <PostLink id="learn-nextjs" title="Learn"/>
-            <PostLink id="deploy-nextjs" title="Deploy"/>
-        </ul>
         <ShowsList shows={props.shows}/>
     </Layout>
 );
