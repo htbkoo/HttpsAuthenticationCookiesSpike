@@ -1,12 +1,11 @@
 import React from 'react';
 
-import Header from '../components/Header';
+import Layout from "../components/MyLayout";
 
 const Index = () => (
-    <div>
-        <Header/>
+    <Layout>
         <p>Hello World</p>
-    </div>
+    </Layout>
 );
 
 export default Index;
