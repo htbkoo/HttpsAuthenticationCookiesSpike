@@ -23,7 +23,10 @@ describe('server', () => {
     it('serves the "/" page of the Next.js app', () => {
         return supertest(httpServer)
             .get('/')
-            .expect(200);
+            .expect(200)
+            .then(response => {
+                expect(response.text).toContain('My Blog')
+            });
     });
 
     it('should return 404 when requesting non existent page', () => {
