@@ -2,6 +2,7 @@ import React from "react";
 import {shallow} from 'enzyme';
 
 import About from './about';
+import Layout from "../components/MyLayout";
 
 describe("<about/>", function () {
     it("should shallow render", function () {
@@ -10,6 +11,6 @@ describe("<about/>", function () {
         let wrapper = shallow(<About/>);
 
         // then
-        expect(wrapper.text()).toContain('about page');
+        expect(wrapper.find(Layout)).toHaveLength(1);
     })
 });
