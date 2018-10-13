@@ -9,9 +9,7 @@ app.prepare()
     .then(() => {
         const server = express();
 
-        server.get('*', (req, res) => {
-            return handle(req, res)
-        });
+        server.get('*', (req, res) => handle(req, res));
 
         // The port that app would listen on
         const port: number = getPortFromEnvOrElse(3000);
