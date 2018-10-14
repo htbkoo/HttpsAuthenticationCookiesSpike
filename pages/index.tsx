@@ -4,20 +4,41 @@ import fetch from 'isomorphic-unfetch';
 
 import Layout from "../components/MyLayout";
 
+const PostLink = ({post}) => (
+    <li>
+        <Link as={`/p/${post.id}`} href={`/post?title=${post.title}`}>
+            <a>{post.title}</a>
+        </Link>
+        <style jsx>{`
+          li {
+            list-style: none;
+            margin: 5px 0;
+          }
+
+          a {
+            text-decoration: none;
+            color: blue;
+            font-family: "Arial";
+          }
+
+          a:hover {
+            opacity: 0.6;
+          }
+    `}</style>
+    </li>
+);
+
 const PostsList = ({posts}) => (
     <div>
         <ul>
             {posts.map(post => (
-                <li key={post.id}>
-                    <Link as={`/p/${post.id}`} href={`/post?title=${post.title}`}>
-                        <a>{post.title}</a>
-                    </Link>
-                </li>
+                <PostLink key={post.id} post={post}/>
             ))}
         </ul>
         <style jsx>{`
       h1, a {
         font-family: "Arial";
+        color: "red";
       }
 
       ul {
