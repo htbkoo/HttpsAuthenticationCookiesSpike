@@ -7,7 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node src/main/typescript/app/server.ts",
     "build": "next build",
-    "start": "cross-env NODE_ENV=production npm run dev"
+    "run-server": "cross-env NODE_ENV=production npm run dev",
+    "start": "next start -p %PORT%",
+    "run:1": "cross-env PORT=8000 npm run start",
+    "run:2": "cross-env PORT=9000 npm run start"
   },
   "repository": {
     "type": "git",
