@@ -1,7 +1,7 @@
 {
-  "name": "analytics-and-ads-spike",
+  "name": "https-authentication-cookies-spike",
   "version": "0.1.0",
-  "description": "A small project to spike the usage of Google Analytics and AdsSense",
+  "description": "A small project to spike the usage of HTTPS / authentication / cookies",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
