@@ -1,5 +1,7 @@
 const express = require('express');
 const next = require('next');
+const https = require('https');
+const fs = require('fs');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
@@ -30,7 +32,14 @@ module.exports = app.prepare()
 
         // The port that app would listen on
         const port: number = getPortFromEnvOrElse(3000);
-        server.listen(port, (err: Error) => {
+        const credentials = {
+            key:fs.readFileSync('certificates/key.pem').toString(),
+            cert: fs.readFileSync('certificates/key-cert.pem').toString()
+        };
+        const options = {
+            ...credentials
+        };
+        https.createServer(options, server).listen(port, (err: Error) => {
             if (err) {
                 throw err;
             } else {
