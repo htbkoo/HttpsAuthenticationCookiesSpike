@@ -33,7 +33,7 @@ module.exports = app.prepare()
         // The port that app would listen on
         const port: number = getPortFromEnvOrElse(3000);
         const credentials = {
-            key:fs.readFileSync('certificates/key.pem').toString(),
+            key: fs.readFileSync('certificates/key.pem').toString(),
             cert: fs.readFileSync('certificates/key-cert.pem').toString()
         };
         const options = {
@@ -56,12 +56,18 @@ module.exports = app.prepare()
     });
 
 function getPortFromEnvOrElse(defaultPort: number): number {
-    let port = process.env.PORT;
-    if (port) {
-        let portAsInt = parseInt(port);
-        if (!isNaN(portAsInt)) {
-            return portAsInt;
-        }
+    let port = getFieldFromEnvOrElse("PORT", defaultPort.toString());
+    let portAsInt = parseInt(port);
+    if (!isNaN(portAsInt)) {
+        return portAsInt;
     }
     return defaultPort;
+}
+
+function getFieldFromEnvOrElse(field: string, defaultValue: string): string {
+    let value = process.env[field];
+    if (value) {
+        return value;
+    }
+    return defaultValue;
 }
