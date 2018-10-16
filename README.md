@@ -1,2 +1,2 @@
-# AnalyticsAndAdsSpike
-A small project to spike the usage of Google Analytics and AdsSense
+# HttpsAuthenticationCookiesSpike
+A small project to spike the usage of HTTPS / authentication / cookies 
