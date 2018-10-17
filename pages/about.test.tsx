@@ -2,7 +2,7 @@ import React from "react";
 import {shallow} from 'enzyme';
 
 import About from './about';
-import Layout from "../components/MyLayout";
+import Layout from "../src/main/typescript/components/MyLayout";
 
 describe("<about/>", function () {
     it("should shallow render", function () {

@@ -2,7 +2,7 @@ import React from 'react';
 import {withRouter} from "next/router";
 import fetch from 'isomorphic-unfetch';
 
-import Layout from "../components/MyLayout";
+import Layout from "../src/main/typescript/components/MyLayout";
 
 const Content = withRouter((props: any) => (
     <div>
