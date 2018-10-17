@@ -22,7 +22,11 @@ type IndexProps = {
     classes: {root: string}
 }
 
-class Index extends React.Component<IndexProps> {
+type IndexState = {
+    open: boolean
+}
+
+class Index extends React.Component<IndexProps, IndexState> {
     state = {
         open: false,
     };
