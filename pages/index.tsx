@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import {createStyles, WithStyles, withStyles} from '@material-ui/core/styles';
 
 import Layout from "../src/main/typescript/components/MyLayout";
+import cookiesRetriever, {Cookies} from "../src/main/typescript/services/cookiesRetriever";
 
 const styles = theme => createStyles({
     root: {
@@ -19,7 +20,7 @@ const styles = theme => createStyles({
     },
 });
 
-interface IndexProps extends WithStyles<typeof styles> {
+interface IndexProps extends WithStyles<typeof styles>, Cookies {
 }
 
 type IndexState = {
@@ -27,6 +28,10 @@ type IndexState = {
 }
 
 class Index extends React.Component<IndexProps, IndexState> {
+    static async getInitialProps() {
+        return await cookiesRetriever.retrieve();
+    }
+
     state = {
         open: false,
     };
@@ -47,8 +52,10 @@ class Index extends React.Component<IndexProps, IndexState> {
         const {classes} = this.props;
         const {open} = this.state;
 
+        console.log(this.props.auth);
+
         return (
-            <Layout>
+            <Layout auth={this.props.auth}>
                 <div className={classes.root}>
                     <Dialog open={open} onClose={this.handleClose}>
                         <DialogTitle>Super Secret Password</DialogTitle>

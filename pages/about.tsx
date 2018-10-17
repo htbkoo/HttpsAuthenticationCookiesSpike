@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import {createStyles, StyleRulesCallback, WithStyles, withStyles} from '@material-ui/core/styles';
 import Layout from "../src/main/typescript/components/MyLayout";
+import cookiesRetriever, {Cookies} from "../src/main/typescript/services/cookiesRetriever";
 
 const styles: StyleRulesCallback = theme => createStyles({
     root: {
@@ -13,14 +14,14 @@ const styles: StyleRulesCallback = theme => createStyles({
     },
 });
 
-interface Props extends WithStyles<typeof styles> {
+interface Props extends WithStyles<typeof styles>, Cookies {
 }
 
 function About(props: Props) {
     const {classes} = props;
 
     return (
-        <Layout>
+        <Layout auth={props.auth}>
             <div className={classes.root}>
                 <Typography variant="h4" gutterBottom>
                     Material-UI
@@ -35,5 +36,7 @@ function About(props: Props) {
         </Layout>
     );
 }
+
+About.getInitialProps = async () => await cookiesRetriever.retrieve();
 
 export default withStyles(styles)(About);

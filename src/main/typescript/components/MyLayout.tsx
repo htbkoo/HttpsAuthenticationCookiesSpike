@@ -12,12 +12,13 @@ const styles = () => createStyles({
 });
 
 interface LayoutProps extends WithStyles<typeof styles> {
-    children: React.ReactNode
+    children: React.ReactNode,
+    auth: boolean
 }
 
 const Layout = (props: LayoutProps) => (
     <div className={props.classes.layout}>
-        <Header/>
+        <Header auth={props.auth}/>
         {props.children}
     </div>
 );

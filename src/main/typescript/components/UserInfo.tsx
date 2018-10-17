@@ -19,16 +19,12 @@ const styles = createStyles({
 });
 
 interface UserInfoProps extends WithStyles<typeof styles> {
+    auth: boolean
 }
 
 class UserInfo extends React.Component<UserInfoProps> {
     state = {
-        auth: true,
         anchorEl: null,
-    };
-
-    handleChange = event => {
-        this.setState({auth: event.target.checked});
     };
 
     handleMenu = event => {
@@ -40,7 +36,8 @@ class UserInfo extends React.Component<UserInfoProps> {
     };
 
     render() {
-        const {auth, anchorEl} = this.state;
+        const {auth} = this.props;
+        const {anchorEl} = this.state;
         const open = Boolean(anchorEl);
 
         return (

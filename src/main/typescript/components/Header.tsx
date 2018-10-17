@@ -20,6 +20,7 @@ const styles = createStyles({
 });
 
 interface UserInfoProps extends WithStyles<typeof styles> {
+    auth: boolean
 }
 
 function Header(props: UserInfoProps) {
@@ -31,7 +32,7 @@ function Header(props: UserInfoProps) {
                 <Toolbar>
                     <NavBar/>
                     <Typography variant="h6" color="inherit" className={classes.grow}/>
-                    <UserInfo/>
+                    <UserInfo auth={props.auth}/>
                 </Toolbar>
             </AppBar>
         </div>
