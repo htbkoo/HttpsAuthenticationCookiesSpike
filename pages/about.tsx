@@ -3,11 +3,11 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import {withStyles} from '@material-ui/core/styles';
+import {StyleRulesCallback, withStyles} from '@material-ui/core/styles';
 import Link from 'next/link';
 import Layout from "../src/main/typescript/components/MyLayout";
 
-const styles = theme => ({
+const styles: StyleRulesCallback = theme => ({
     root: {
         textAlign: 'center',
         paddingTop: theme.spacing.unit * 20,
@@ -39,4 +39,4 @@ function About(props: { classes: { root: string } }) {
     );
 }
 
-export default withStyles(styles as any)(About as any);
+export default withStyles(styles)(About as any);
