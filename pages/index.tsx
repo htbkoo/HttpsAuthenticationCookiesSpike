@@ -1,104 +1,79 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+
 import React from 'react';
+import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogActions from '@material-ui/core/DialogActions';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
 import Link from 'next/link';
-import fetch from 'isomorphic-unfetch';
 
-import Layout from "../components/MyLayout";
+const styles = theme => ({
+    root: {
+        textAlign: 'center',
+        paddingTop: theme.spacing.unit * 20,
+    },
+});
 
-const PostLink = ({post}) => (
-    <li>
-        <Link as={`/p/${post.id}`} href={`/post?title=${post.title}`}>
-            <a>{post.title}</a>
-        </Link>
-        <style jsx>{`
-          li {
-            list-style: none;
-            margin: 5px 0;
-          }
-
-          a {
-            text-decoration: none;
-            color: blue;
-            font-family: "Arial";
-          }
-
-          a:hover {
-            opacity: 0.6;
-          }
-    `}</style>
-    </li>
-);
-
-const PostsList = ({posts}) => (
-    <div>
-        <ul>
-            {posts.map(post => (
-                <PostLink key={post.id} post={post}/>
-            ))}
-        </ul>
-        <style jsx>{`
-      h1, a {
-        font-family: "Arial";
-        color: "red";
-      }
-
-      ul {
-        padding: 0;
-      }
-
-      li {
-        list-style: none;
-        margin: 5px 0;
-      }
-
-      a {
-        text-decoration: none;
-        color: blue;
-      }
-
-      a:hover {
-        opacity: 0.6;
-      }
-    `}</style>
-    </div>
-);
-
-const ShowsList = ({shows}) => (
-    <ul>
-        {shows.map(({show}) => (
-            <li key={show.id}>
-                <Link as={`/s/${show.id}`} href={`/show?id=${show.id}`}>
-                    <a>{show.name}</a>
-                </Link>
-            </li>
-        ))}
-    </ul>
-);
-
-const Index = (props) => (
-    <Layout>
-        <h1>My Blog</h1>
-        <PostsList posts={getPosts()}/>
-        <ShowsList shows={props.shows}/>
-    </Layout>
-);
-
-Index.getInitialProps = async function () {
-    const res = await fetch('https://api.tvmaze.com/search/shows?q=batman');
-    const data = await res.json();
-
-    console.log(`Show data fetched. Count: ${data.length}`);
-
-    return {
-        shows: data
+class Index extends React.Component {
+    state = {
+        open: false,
     };
-};
 
-function getPosts() {
-    return [
-        {id: 'hello-nextjs', title: 'Hello Next.js'},
-        {id: 'learn-nextjs', title: 'Learn Next.js'},
-        {id: 'deploy-nextjs', title: 'Deploy Next.js'},
-    ];
+    handleClose = () => {
+        this.setState({
+            open: false,
+        });
+    };
+
+    handleClick = () => {
+        this.setState({
+            open: true,
+        });
+    };
+
+    render() {
+        const { classes } = this.props;
+        const { open } = this.state;
+
+        return (
+            <div className={classes.root}>
+                <Dialog open={open} onClose={this.handleClose}>
+                    <DialogTitle>Super Secret Password</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>1-2-3-4-5</DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button color="primary" onClick={this.handleClose}>
+                            OK
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+                <Typography variant="h4" gutterBottom>
+                    Material-UI
+                </Typography>
+                <Typography variant="subtitle1" gutterBottom>
+                    example project
+                </Typography>
+                <Typography gutterBottom>
+                    <Link href="/about">
+                        <a>Go to the about page</a>
+                    </Link>
+                </Typography>
+                <Button variant="contained" color="secondary" onClick={this.handleClick}>
+                    Super Secret Password
+                </Button>
+            </div>
+        );
+    }
 }
 
-export default Index;
+Index.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(Index);
