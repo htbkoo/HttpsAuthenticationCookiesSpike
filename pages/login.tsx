@@ -4,7 +4,6 @@ import React from 'react';
 import {createStyles, WithStyles, withStyles} from '@material-ui/core/styles';
 
 import userInfoService, {Cookies} from "../src/main/typescript/services/userInfoService";
-import Router from "next/router";
 import {Button, Paper, Typography} from "@material-ui/core";
 import Link from "next/link";
 
@@ -20,17 +19,6 @@ interface IndexProps extends WithStyles<typeof styles>, Cookies {
 
 type IndexState = {
     open: boolean
-}
-
-function alwaysRedirect(ctx, url: string) {
-    if (ctx && ctx.req) {
-        console.log('server side');
-        ctx.res.writeHead(301, {Location: url});
-        return ctx.res.end();
-    } else {
-        console.log('client side');
-        return Router.push(url);
-    }
 }
 
 class Login extends React.Component<IndexProps, IndexState> {
