@@ -27,7 +27,7 @@ function Header(props: UserInfoProps) {
 
     return (
         <div className={classes.root}>
-            <AppBar position="static">
+            <AppBar position="static" color="secondary">
                 <Toolbar>
                     <NavBar/>
                     <Typography variant="h6" color="inherit" className={classes.grow}/>

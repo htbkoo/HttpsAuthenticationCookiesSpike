@@ -1,13 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
 import Typography from "@material-ui/core/Typography/Typography";
-import {withStyles, WithStyles} from "@material-ui/core";
+import {Button, createStyles, withStyles, WithStyles} from "@material-ui/core";
 
-const styles = {
+const styles = theme => createStyles({
     link: {
+        margin: theme.spacing.unit,
         marginRight: 15
     }
-};
+});
 
 interface Props extends WithStyles<typeof styles> {
 
@@ -16,10 +17,10 @@ interface Props extends WithStyles<typeof styles> {
 const NavBar = (props: Props) => (
     <Typography gutterBottom>
         <Link href="/">
-            <a className={props.classes.link}>Home</a>
+            <Button color="inherit" className={props.classes.link}>Home</Button>
         </Link>
         <Link href="/about">
-            <a className={props.classes.link}>About</a>
+            <Button color="inherit" className={props.classes.link}>About</Button>
         </Link>
     </Typography>
 );
