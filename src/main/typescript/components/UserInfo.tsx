@@ -27,6 +27,7 @@ interface UserInfoProps extends WithStyles<typeof styles> {
 class UserInfo extends React.Component<UserInfoProps> {
     state = {
         auth: false,
+        ready: false,
         anchorEl: null,
     };
 
@@ -40,58 +41,60 @@ class UserInfo extends React.Component<UserInfoProps> {
 
     async componentDidMount() {
         let {auth} = await userInfoService.retrieve();
-        this.setState({auth});
+        this.setState({ready: true, auth});
     }
 
     render() {
-        const {anchorEl, auth} = this.state;
+        const {anchorEl, auth, ready} = this.state;
         const open = Boolean(anchorEl);
 
         return (
             <div>
-                {auth
-                    ? (
-                        <div>
-                            <IconButton
-                                aria-owns={open ? 'menu-appbar' : undefined}
-                                aria-haspopup="true"
-                                onClick={this.handleMenu}
-                                color="inherit"
-                            >
-                                <AccountCircle/>
-                            </IconButton>
-                            <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorEl}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={open}
-                                onClose={this.handleClose}
-                            >
-                                <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                                <MenuItem onClick={this.handleClose}>My account</MenuItem>
-                                <Link href="/">
-                                    <MenuItem onClick={() => {
-                                        userInfoService.remove();
-                                        window.location.href = '/';
-                                    }}>Logout</MenuItem>
+                {ready && (
+                    auth
+                        ? (
+                            <div>
+                                <IconButton
+                                    aria-owns={open ? 'menu-appbar' : undefined}
+                                    aria-haspopup="true"
+                                    onClick={this.handleMenu}
+                                    color="inherit"
+                                >
+                                    <AccountCircle/>
+                                </IconButton>
+                                <Menu
+                                    id="menu-appbar"
+                                    anchorEl={anchorEl}
+                                    anchorOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    open={open}
+                                    onClose={this.handleClose}
+                                >
+                                    <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+                                    <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                                    <Link href="/">
+                                        <MenuItem onClick={() => {
+                                            userInfoService.remove();
+                                            window.location.href = '/';
+                                        }}>Logout</MenuItem>
+                                    </Link>
+                                </Menu>
+                            </div>
+                        )
+                        : (
+                            <div>
+                                <Link href="/login">
+                                    <Button color="inherit">Login</Button>
                                 </Link>
-                            </Menu>
-                        </div>
-                    )
-                    : (
-                        <div>
-                            <Link href="/login">
-                                <Button color="inherit">Login</Button>
-                            </Link>
-                        </div>
-                    )}
+                            </div>
+                        )
+                )}
             </div>
         );
     }
