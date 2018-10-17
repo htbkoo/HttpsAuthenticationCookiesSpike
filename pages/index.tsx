@@ -11,6 +11,8 @@ import Typography from '@material-ui/core/Typography';
 import {withStyles} from '@material-ui/core/styles';
 import Link from 'next/link';
 
+import Layout from "../src/main/typescript/components/MyLayout";
+
 const styles = theme => ({
     root: {
         textAlign: 'center',
@@ -19,7 +21,7 @@ const styles = theme => ({
 });
 
 type IndexProps = {
-    classes: {root: string}
+    classes: { root: string }
 }
 
 type IndexState = {
@@ -48,33 +50,35 @@ class Index extends React.Component<IndexProps, IndexState> {
         const {open} = this.state;
 
         return (
-            <div className={classes.root}>
-                <Dialog open={open} onClose={this.handleClose}>
-                    <DialogTitle>Super Secret Password</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText>1-2-3-4-5</DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button color="primary" onClick={this.handleClose}>
-                            OK
-                        </Button>
-                    </DialogActions>
-                </Dialog>
-                <Typography variant="h4" gutterBottom>
-                    Material-UI
-                </Typography>
-                <Typography variant="subtitle1" gutterBottom>
-                    example project
-                </Typography>
-                <Typography gutterBottom>
-                    <Link href="/about">
-                        <a>Go to the about page</a>
-                    </Link>
-                </Typography>
-                <Button variant="contained" color="secondary" onClick={this.handleClick}>
-                    Super Secret Password
-                </Button>
-            </div>
+            <Layout>
+                <div className={classes.root}>
+                    <Dialog open={open} onClose={this.handleClose}>
+                        <DialogTitle>Super Secret Password</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>1-2-3-4-5</DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button color="primary" onClick={this.handleClose}>
+                                OK
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
+                    <Typography variant="h4" gutterBottom>
+                        Material-UI
+                    </Typography>
+                    <Typography variant="subtitle1" gutterBottom>
+                        example project
+                    </Typography>
+                    <Typography gutterBottom>
+                        <Link href="/about">
+                            <a>Go to the about page</a>
+                        </Link>
+                    </Typography>
+                    <Button variant="contained" color="secondary" onClick={this.handleClick}>
+                        Super Secret Password
+                    </Button>
+                </div>
+            </Layout>
         );
     }
 }
