@@ -2,7 +2,7 @@ import React from 'react';
 
 import NavBar from "./NavBar";
 import UserInfo from "./UserInfo";
-import {createStyles, WithStyles} from "@material-ui/core";
+import {createStyles, withStyles, WithStyles} from "@material-ui/core";
 
 const styles = () => createStyles({
     header: {
@@ -21,4 +21,4 @@ const Header = (props:Props) => (
     </div>
 );
 
-export default Header;
+export default withStyles(styles)(Header);
