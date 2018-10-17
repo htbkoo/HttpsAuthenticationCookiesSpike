@@ -14,17 +14,19 @@ interface Props extends WithStyles<typeof styles> {
 
 }
 
-const LinkButton = ({href, text, className}: { href: string, text: string, className: string }) => (
-    <Link href={href}>
-        <Button color="inherit" className={className}>{text}</Button>
-    </Link>
-);
+const NavBar = (props: Props) => {
+    const LinkButton = ({href, text}: { href: string, text: string }) => (
+        <Link href={href}>
+            <Button color="inherit" className={props.classes.link}>{text}</Button>
+        </Link>
+    );
 
-const NavBar = (props: Props) => (
-    <Typography gutterBottom>
-        <LinkButton href="/" text="Home" className={props.classes.link}/>
-        <LinkButton href="/about" text="About" className={props.classes.link}/>
-    </Typography>
-);
+    return (
+        <Typography gutterBottom>
+            <LinkButton href="/" text="Home"/>
+            <LinkButton href="/about" text="About"/>
+        </Typography>
+    )
+};
 
 export default withStyles(styles)(NavBar);
