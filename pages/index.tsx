@@ -8,19 +8,18 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
 import Typography from '@material-ui/core/Typography';
-import {withStyles} from '@material-ui/core/styles';
+import {createStyles, WithStyles, withStyles} from '@material-ui/core/styles';
 
 import Layout from "../src/main/typescript/components/MyLayout";
 
-const styles = theme => ({
+const styles = theme => createStyles({
     root: {
         textAlign: 'center',
         paddingTop: theme.spacing.unit * 20,
     },
 });
 
-type IndexProps = {
-    classes: { root: string }
+interface IndexProps extends WithStyles<typeof styles> {
 }
 
 type IndexState = {
@@ -77,4 +76,4 @@ class Index extends React.Component<IndexProps, IndexState> {
     }
 }
 
-export default withStyles(styles as any)(Index as any);
+export default withStyles(styles)(Index);
