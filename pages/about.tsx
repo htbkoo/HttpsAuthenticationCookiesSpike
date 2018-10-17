@@ -3,17 +3,20 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import {StyleRulesCallback, withStyles} from '@material-ui/core/styles';
+import {createStyles, StyleRulesCallback, WithStyles, withStyles} from '@material-ui/core/styles';
 import Layout from "../src/main/typescript/components/MyLayout";
 
-const styles: StyleRulesCallback = theme => ({
+const styles: StyleRulesCallback = theme => createStyles({
     root: {
         textAlign: 'center',
         paddingTop: theme.spacing.unit * 20,
     },
 });
 
-function About(props: { classes: { root: string } }) {
+interface Props extends WithStyles<typeof styles> {
+}
+
+function About(props: Props) {
     const {classes} = props;
 
     return (
@@ -33,4 +36,4 @@ function About(props: { classes: { root: string } }) {
     );
 }
 
-export default withStyles(styles)(About as any);
+export default withStyles(styles)(About);
