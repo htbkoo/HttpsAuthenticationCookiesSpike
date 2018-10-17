@@ -1,22 +1,25 @@
 import React from 'react';
 
 import Header from "./Header";
+import {createStyles, withStyles, WithStyles} from "@material-ui/core";
 
-const layoutStyle = {
-    margin: 20,
-    padding: 20,
-    border: '1px solid #DDD'
-};
+const styles = () => createStyles({
+    layout: {
+        margin: 20,
+        padding: 20,
+        border: '1px solid #DDD'
+    }
+});
 
-type LayoutProps = {
+interface LayoutProps extends WithStyles<typeof styles> {
     children: React.ReactNode
 }
 
 const Layout = (props: LayoutProps) => (
-    <div style={layoutStyle}>
+    <div className={props.classes.layout}>
         <Header/>
         {props.children}
     </div>
 );
 
-export default Layout;
+export default withStyles(styles)(Layout);
