@@ -9,7 +9,6 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
 import Typography from '@material-ui/core/Typography';
 import {withStyles} from '@material-ui/core/styles';
-import Link from 'next/link';
 
 import Layout from "../src/main/typescript/components/MyLayout";
 
@@ -68,11 +67,6 @@ class Index extends React.Component<IndexProps, IndexState> {
                     </Typography>
                     <Typography variant="subtitle1" gutterBottom>
                         example project
-                    </Typography>
-                    <Typography gutterBottom>
-                        <Link href="/about">
-                            <a>Go to the about page</a>
-                        </Link>
                     </Typography>
                     <Button variant="contained" color="secondary" onClick={this.handleClick}>
                         Super Secret Password

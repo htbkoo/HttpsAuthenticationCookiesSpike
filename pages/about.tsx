@@ -4,7 +4,6 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import {StyleRulesCallback, withStyles} from '@material-ui/core/styles';
-import Link from 'next/link';
 import Layout from "../src/main/typescript/components/MyLayout";
 
 const styles: StyleRulesCallback = theme => ({
@@ -25,11 +24,6 @@ function About(props: { classes: { root: string } }) {
                 </Typography>
                 <Typography variant="subtitle1" gutterBottom>
                     about page
-                </Typography>
-                <Typography gutterBottom>
-                    <Link href="/">
-                        <a>Go to the main page</a>
-                    </Link>
                 </Typography>
                 <Button variant="contained" color="primary">
                     Do nothing button
