@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import {createStyles, WithStyles, withStyles} from '@material-ui/core/styles';
 
 import Layout from "../src/main/typescript/components/MyLayout";
-import userInfoService, {Cookies} from "../src/main/typescript/services/userInfoService";
+import userInfoService from "../src/main/typescript/services/userInfoService";
 
 const styles = theme => createStyles({
     root: {
@@ -20,7 +20,7 @@ const styles = theme => createStyles({
     },
 });
 
-interface IndexProps extends WithStyles<typeof styles>, Cookies {
+interface IndexProps extends WithStyles<typeof styles> {
 }
 
 type IndexState = {
@@ -55,7 +55,7 @@ class Index extends React.Component<IndexProps, IndexState> {
         const {open} = this.state;
 
         return (
-            <Layout auth={this.props.auth}>
+            <Layout>
                 <div className={classes.root}>
                     <Dialog open={open} onClose={this.handleClose}>
                         <DialogTitle>Super Secret Password</DialogTitle>
