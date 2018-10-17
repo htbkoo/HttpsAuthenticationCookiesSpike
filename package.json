@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node src/main/typescript/app/server.ts",
+    "debug": "ts-node %NODE_DEBUG_OPTION% src/main/typescript/app/server.ts",
     "build": "next build",
     "run-server": "cross-env NODE_ENV=production npm run dev",
     "start": "next start -p %PORT%",

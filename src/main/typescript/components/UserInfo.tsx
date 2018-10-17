@@ -4,6 +4,9 @@ import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import {Button} from "@material-ui/core";
+import Link from "next/link";
+import userInfoService from "../services/userInfoService";
 
 const styles = createStyles({
     root: {
@@ -19,11 +22,11 @@ const styles = createStyles({
 });
 
 interface UserInfoProps extends WithStyles<typeof styles> {
-    auth: boolean
 }
 
 class UserInfo extends React.Component<UserInfoProps> {
     state = {
+        auth: false,
         anchorEl: null,
     };
 
@@ -35,42 +38,60 @@ class UserInfo extends React.Component<UserInfoProps> {
         this.setState({anchorEl: null});
     };
 
+    async componentDidMount() {
+        let {auth} = await userInfoService.retrieve();
+        this.setState({auth});
+    }
+
     render() {
-        const {auth} = this.props;
-        const {anchorEl} = this.state;
+        const {anchorEl, auth} = this.state;
         const open = Boolean(anchorEl);
 
         return (
             <div>
-                {auth && (
-                    <div>
-                        <IconButton
-                            aria-owns={open ? 'menu-appbar' : undefined}
-                            aria-haspopup="true"
-                            onClick={this.handleMenu}
-                            color="inherit"
-                        >
-                            <AccountCircle/>
-                        </IconButton>
-                        <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorEl}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={open}
-                            onClose={this.handleClose}
-                        >
-                            <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                            <MenuItem onClick={this.handleClose}>My account</MenuItem>
-                        </Menu>
-                    </div>
-                )}
+                {auth
+                    ? (
+                        <div>
+                            <IconButton
+                                aria-owns={open ? 'menu-appbar' : undefined}
+                                aria-haspopup="true"
+                                onClick={this.handleMenu}
+                                color="inherit"
+                            >
+                                <AccountCircle/>
+                            </IconButton>
+                            <Menu
+                                id="menu-appbar"
+                                anchorEl={anchorEl}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={open}
+                                onClose={this.handleClose}
+                            >
+                                <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+                                <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                                <Link href="/">
+                                    <MenuItem onClick={() => {
+                                        userInfoService.remove();
+                                        window.location.href = '/';
+                                    }}>Logout</MenuItem>
+                                </Link>
+                            </Menu>
+                        </div>
+                    )
+                    : (
+                        <div>
+                            <Link href="/login">
+                                <Button color="inherit">Login</Button>
+                            </Link>
+                        </div>
+                    )}
             </div>
         );
     }

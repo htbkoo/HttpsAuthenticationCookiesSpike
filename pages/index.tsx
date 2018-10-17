@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import {createStyles, WithStyles, withStyles} from '@material-ui/core/styles';
 
 import Layout from "../src/main/typescript/components/MyLayout";
-import cookiesRetriever, {Cookies} from "../src/main/typescript/services/cookiesRetriever";
+import userInfoService, {Cookies} from "../src/main/typescript/services/userInfoService";
 
 const styles = theme => createStyles({
     root: {
@@ -29,7 +29,9 @@ type IndexState = {
 
 class Index extends React.Component<IndexProps, IndexState> {
     static async getInitialProps() {
-        return await cookiesRetriever.retrieve();
+        let cookies = await userInfoService.retrieve();
+        console.log(`loading getInitialProps in Index: cookies.auth=${cookies.auth}`);
+        return cookies;
     }
 
     state = {
@@ -51,8 +53,6 @@ class Index extends React.Component<IndexProps, IndexState> {
     render() {
         const {classes} = this.props;
         const {open} = this.state;
-
-        console.log(this.props.auth);
 
         return (
             <Layout auth={this.props.auth}>
