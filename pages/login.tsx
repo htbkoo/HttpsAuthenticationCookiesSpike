@@ -3,9 +3,8 @@
 import React from 'react';
 import {createStyles, WithStyles, withStyles} from '@material-ui/core/styles';
 
-import userInfoService, {Cookies} from "../src/main/typescript/services/userInfoService";
+import {Cookies} from "../src/main/typescript/services/userInfoService";
 import {Button, Paper, TextField, Typography} from "@material-ui/core";
-import Link from "next/link";
 
 const styles = theme => createStyles({
     root: {
@@ -25,7 +24,8 @@ interface IndexProps extends WithStyles<typeof styles>, Cookies {
 }
 
 enum FIELDS {
-    NAME = "name"
+    NAME = "name",
+    PASSWORD = "password"
 }
 
 type IndexState = {
@@ -36,23 +36,34 @@ class Login extends React.Component<IndexProps, IndexState> {
     constructor(props: IndexProps) {
         super(props);
         this.state = {
-            [FIELDS.NAME]: ""
+            [FIELDS.NAME]: "",
+            [FIELDS.PASSWORD]: "",
         };
-        console.log(this.state);
 
         this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(field: FIELDS) {
-        return event => {
-            console.log(field);
-            console.log(event);
-            console.log(event.target.value);
-            let state = {[field]: event.target.value};
-            console.log(state);
-            return this.setState(state);
-        }
+        return event => this.setState({[field]: event.target.value} as {})
     }
+
+    handleLoginButtonClick(event) {
+
+    }
+
+    getLoginTextField({isPassword = false, field, id, label, className}) {
+        return (
+            <TextField
+                id={id}
+                label={label}
+                className={className}
+                value={this.state[field]}
+                onChange={this.handleChange(field)}
+                type={isPassword ? "password" : "text"}
+                margin="normal"
+            />
+        )
+    };
 
     render() {
         const {classes} = this.props;
@@ -63,26 +74,21 @@ class Login extends React.Component<IndexProps, IndexState> {
                         Sign in
                     </Typography>
                     <form className={classes.form} noValidate autoComplete="off">
-                        <TextField
-                            id="username"
-                            label="Username"
-                            className={classes.textField}
-                            value={this.state[FIELDS.NAME]}
-                            onChange={this.handleChange(FIELDS.NAME)}
-                            margin="normal"
-                        />
-                        <TextField
-                            id="password"
-                            label="Password"
-                            className={classes.textField}
-                            type="password"
-                            autoComplete="current-password"
-                            margin="normal"
-                        />
+                        {this.getLoginTextField({
+                            field: FIELDS.NAME,
+                            id: "username",
+                            label: "username",
+                            className: classes.textField
+                        })}
+                        {this.getLoginTextField({
+                            isPassword: true,
+                            field: FIELDS.PASSWORD,
+                            id: "password",
+                            label: "password",
+                            className: classes.textField
+                        })}
                     </form>
-                    <Link href="/">
-                        <Button onClick={() => userInfoService.set()} variant="raised">Login</Button>
-                    </Link>
+                    <Button onClick={this.handleLoginButtonClick} variant="contained">Login</Button>
                 </Paper>
             </div>
         );
