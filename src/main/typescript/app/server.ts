@@ -30,6 +30,47 @@ module.exports = app.prepare()
             return handle(req, res);
         });
 
+        // POST handler
+        server.post("/login", (req, res) => {
+            console.log('trying to login');
+
+            // refernce: https://stackoverflow.com/a/33905671
+            // -----------------------------------------------------------------------
+            // authentication middleware
+
+            const auth = {login: 'l', password: 'p'}; // change this
+
+            // parse login and password from headers
+            const {login, password} = parseLoginAndPassword(req);
+
+            // Verify login and password are set and correct
+            if (!login || !password || login !== auth.login || password !== auth.password) {
+                res.set('WWW-Authenticate', 'Basic realm="401"'); // change this
+                res.status(401).send('Authentication required.'); // custom message
+                return
+            }
+
+            // -----------------------------------------------------------------------
+            // Access granted...
+            // next();
+            return res.json({successful: "true"});
+
+            function parseLoginAndPassword(req) {
+                // parse login and password from headers
+                const b64auth = (req.headers.authorization || '').split(' ')[1] || '';
+                const strauth = new Buffer(b64auth, 'base64').toString();
+                const splitIndex = strauth.indexOf(':');
+                const login = strauth.substring(0, splitIndex);
+                const password = strauth.substring(splitIndex + 1);
+
+                // Don't use .split(':') because it will choke on passwords containing at least one colon. Such passwords are valid according to RFC 2617
+                // reference: https://stackoverflow.com/questions/23616371/basic-http-authentication-with-node-and-express-4#comment84211450_33905671
+                // const b64auth = (req.headers.authorization || '').split(' ')[1] || '';
+                // const [login, password] = new Buffer(b64auth, 'base64').toString().split(':');
+                return {login, password};
+            }
+        });
+
         // The port that app would listen on
         const port: number = getPortFromEnvOrElse(3000);
         const credentials = {

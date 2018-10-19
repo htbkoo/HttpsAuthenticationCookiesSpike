@@ -2,6 +2,7 @@
 
 import React from 'react';
 import {createStyles, WithStyles, withStyles} from '@material-ui/core/styles';
+import fetch from 'isomorphic-unfetch';
 
 import {Cookies} from "../src/main/typescript/services/userInfoService";
 import {Button, Paper, TextField, Typography} from "@material-ui/core";
@@ -41,14 +42,26 @@ class Login extends React.Component<IndexProps, IndexState> {
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleLoginButtonClick = this.handleLoginButtonClick.bind(this);
     }
 
     handleChange(field: FIELDS) {
         return event => this.setState({[field]: event.target.value} as {})
     }
 
-    handleLoginButtonClick(event) {
-
+    handleLoginButtonClick() {
+        return fetch('/login', {
+            method: 'POST',
+            headers: new Headers({
+                'Authorization': 'Basic ' + btoa(`${this.state[FIELDS.NAME]}:${this.state[FIELDS.PASSWORD]}`),
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }),
+            // headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({})
+        })
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error(err));
     }
 
     getLoginTextField({isPassword = false, field, id, label, className}) {
